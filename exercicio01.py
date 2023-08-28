@@ -1,5 +1,7 @@
 ''''
+##AULA DE OPERADORES
 1. Crie um programa que peça um número e mostre o seu sucessor e antecessor
+
 '''
 
 numero = int(input("Digite o Numero: "))
