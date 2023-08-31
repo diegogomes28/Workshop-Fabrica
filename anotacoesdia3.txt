@@ -1,0 +1,153 @@
+Set-ExecutionPolicy -ExecutionPolicy AllSigned -Scope LocalMachine
+Set-ExecutionPolicy -ExecutionPolicy AllSigned -Scope CurrentUser
+
+python -m venv venv			>criando venv
+.\venv\Scripts\activate			>ativando a venv
+pip install django			>instalando django
+pip install djangorestframework		>instalando django rest
+django-admin startproject agenda .#ponto>criando projeto
+criar pasta apps na pasta projeto
+priar arquivo .gitignore
+no arquivo .gitignore digitar:
+	venv
+
+	*.sqlite3
+
+	__pycache__
+
+DEPOIS DE CLONAR O PROJETO FAZER OS SEGUINTES COMANDOS:
+	python -m venv venv
+	venv\Scripts\activate
+	pip install -r requirements.txt
+SEMPRE QUE TIVER UMA DEPENDECIA NOVA NO PROJETO:
+	pip freeze > requirements.txt
+abrir settings
+	procurar por INSTALLED_APPS
+	adicionar 'rest_framework',
+
+	iniciar projeto
+manage.py gerencia o projeto							
+python .\manage.py startapp todo
+python .\manage.py startapp users
+	
+	colocar todas as pastas dentro da pasta apps
+
+apps>todo>apps.py:
+	name = 'apps.todo'
+apps>users>apps.py:
+	name = 'apps.users'
+nomeProjeto>settings.py:
+	INSTALLED_APPS:
+	'apps.todo',
+	'apps.users',
+
+TESTANDO PROJETO:
+	python .\manage.py runserver
+
+NAVEGADOR
+	http://127.0.0.1:8000/
+
+
+python .\manage.py migrate	banco de dados criados
+
+python .\manage.py createsuperuser
+	username: admin
+	email:
+	password: admin *n aparece no terminal
+	password (again): admin	*n aparece no terminal
+	y
+
+TESTANDO PROJETO NOVAMENTE:
+	python .\manage.py runserver
+	NAVEGADOR:
+	127.0.0.1:8000/
+	127.0.0.1:8000/admin
+	fazer login com as mesmas credenciais de acesso criada no `createsuperuser
+
+modesls.py	todo
+	para criar tabelas de banco de dados
+		class Task(models.Model):
+    			name = models.CharField(max_length=200)# campo de texto limitado
+    
+    			description = models.TextField()# sem limite de caracters
+    
+    			date = models.DateField()# data
+    
+    			def __str__(self):
+        			return self.name
+
+ modesls.py	users
+
+		from django.db import models
+
+		# Create your models here.
+		class User(models.Model):
+    			name = models.CharField(max_length=200)
+    
+    			email = models.EmailField()
+
+python .\manage.py makemigrations
+python .\manage.py migrations
+
+	criar nova pasta em \todo: api
+
+
+	criar arquivo em pasta \api: serializers.py
+from rest_framework import serializers
+
+from apps.todo.models import Task
+
+class TaskSerializer(serializers.Serializer):
+    class Meta:
+        model = Task
+        
+        fields = ["name", "description", "date"] # dados do models.py
+
+
+	criar arquivo em pasta \api: viewsets.py
+from rest_framework.viewsets import ModelViewSet
+
+from apps.todo.models import Task
+from .serializers import TaskSerializer
+# importante o ponto para procurar o serializers dentro da mesma pasta que esta o viewsets
+
+class TaskViewSet(ModelViewSet):
+    
+    # quero todos os dados que estao na tabela Task
+    queryset = Task.objects.all() # obrigatório > chamada para o banco de dados
+    
+    serializer_class = TaskSerializer # 
+
+	criar na pasta \todo: urls.py
+from django.urls import path, include
+
+from rest_framework import routers
+
+from apps.todo.api.viewsets import TaskViewSet
+
+# o carinha que vai criar a endpoint
+router = routers.DefaultRouter()
+
+router.register("", TaskViewSet, basename="task")# deixa em branco
+
+urlpatterns = [
+    path("", include(router.urls)),
+]
+
+	ir em \agenda\urls.py
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    
+    path("agenda/", include("apps.todo.urls")),
+]
+
+
+python .\manage.py runserver
+127.0.0.1:8000\agenda
+
+	
+	
