@@ -6,21 +6,25 @@ Essa Aplicação permite utilização das operações do CRUD ( Criar, Ler, Atua
 
 
 <h3>Requisitos </h3>
-*Python 3.10
-*Django 4.2
-*MySql 0.0.3
-*MySqlClient 2.2.0
-*Xampp Control Panel to run MySQL
+-Python 3.10
+
+-*Django 4.2
+
+-MySql 0.0.3
+
+-MySqlClient 2.2.0
+
+-*Xampp Control Panel to run MySQL
 
 <h3>Instalação </h3>
-*Clonar um repisotiro do git
+-Clonar um repisotiro do git
 
-*Entrar no ambiente virtual no terminal
+-Entrar no ambiente virtual no terminal
 
-*Após entrar, instalar os requerimentos utilizando "pip install -r requeriments.txt"
+-Após entrar, instalar os requerimentos utilizando "pip install -r requeriments.txt"
 
-*Abrir o Control Panel do XAMPP e ativar o APACHE e o MYSQL
+-Abrir o Control Panel do XAMPP e ativar o APACHE e o MYSQL
 
-*Abrir um banco de dados no MYSQL com nome "mydata"
+-Abrir um banco de dados no MYSQL com nome "mydata"
 
-*Executar o comando python manage.py runserver no terminal
+-Executar o comando python manage.py runserver no terminal
