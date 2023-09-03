@@ -6,17 +6,19 @@ Essa Aplicação permite utilização das operações do CRUD ( Criar, Ler, Atua
 
 
 <h3>Requisitos </h3>
+
 -Python 3.10
 
--*Django 4.2
+-Django 4.2
 
 -MySql 0.0.3
 
 -MySqlClient 2.2.0
 
--*Xampp Control Panel to run MySQL
+-Xampp Control Panel to run MySQL
 
 <h3>Instalação </h3>
+
 -Clonar um repisotiro do git
 
 -Entrar no ambiente virtual no terminal
